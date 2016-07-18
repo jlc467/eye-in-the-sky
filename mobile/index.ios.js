@@ -1,3 +1,4 @@
+const { firebaseConfig } = require( '../config.js')
 import React, { Component } from 'react'
 import {
   AppRegistry,
@@ -10,14 +11,6 @@ import {
 
 import firebase from 'firebase'
 import { RNLocation as Location } from 'NativeModules'
-
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: "Ma2GyFgiUmpueLu4n2ge4Ut7zchkfO4NDlbTgZMN",
-  authDomain: "gpstracker-60a24.firebaseapp.com",
-  databaseURL: "https://gpstracker-60a24.firebaseio.com/",
-  storageBucket: "gs://gpstracker-60a24.appspot.com"
-}
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
 
