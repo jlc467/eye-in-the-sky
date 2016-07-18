@@ -20,8 +20,8 @@ class Home extends React.Component {
     this.listenForItems(this.locationsRef)
   }
   listenForItems(locationsRef) {
-    locationsRef.on('child_added', (childSnapshot, prevChildKey) => {
-      console.log(childSnapshot.val())
+    locationsRef.limitToLast(50).on("child_added", snapshot => {
+      console.log(snapshot.val())
     })
   }
   render() {

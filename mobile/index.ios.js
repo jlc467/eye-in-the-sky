@@ -1,4 +1,3 @@
-const { firebaseConfig } = require( '../config.js')
 import React, { Component } from 'react'
 import {
   AppRegistry,
@@ -12,24 +11,22 @@ import {
 import firebase from 'firebase'
 import { RNLocation as Location } from 'NativeModules'
 
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "Ma2GyFgiUmpueLu4n2ge4Ut7zchkfO4NDlbTgZMN",
+  authDomain: "gpstracker-60a24.firebaseapp.com",
+  databaseURL: "https://gpstracker-60a24.firebaseio.com/",
+  storageBucket: "gs://gpstracker-60a24.appspot.com"
+}
+
 const firebaseApp = firebase.initializeApp(firebaseConfig)
 
 
 class Eyeinthesky extends Component {
   constructor() {
     super()
-    this.state = { location: {
-        coords: {
-          course:358.28,
-          speed:0,
-          longitude:-122.02322184,
-          latitude:37.33743371,
-          accuracy:5,
-          altitude:0,
-          altitudeAccuracy:-1
-        },
-        timestamp:0
-      }
+    this.state = {
+      location: {}
     }
     this.locationsRef = this.getRef().child('locations')
   }
@@ -42,22 +39,8 @@ class Eyeinthesky extends Component {
     Location.setDistanceFilter(5.0)
     DeviceEventEmitter.addListener('locationUpdated', (location) => {
       console.log(location)
-      this.setState({'location':location})
+      this.setState({ location })
       this.locationsRef.push({ location })
-    })
-    this.listenForItems(this.locationsRef)
-  }
-  listenForItems(locationsRef) {
-    locationsRef.on('value', (snap) => {
-
-      // get children as an array
-      const locations = []
-      snap.forEach((child) => {
-        locations.push({
-          title: child.val().title,
-          _key: child.key
-        })
-      })
     })
   }
   render() {
