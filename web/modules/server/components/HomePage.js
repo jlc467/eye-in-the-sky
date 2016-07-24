@@ -27,9 +27,11 @@ class HomePage extends React.Component {
           <script dangerouslySetInnerHTML={{ __html: "window.Promise || document.write('\\x3Cscript src=\"/es6-promise.min.js\">\\x3C/script>\\x3Cscript>ES6Promise.polyfill()\\x3C/script>')" }}/>
           <script dangerouslySetInnerHTML={{ __html: "window.fetch || document.write('\\x3Cscript src=\"/fetch.min.js\">\\x3C/script>')" }}/>
           {styles.map(s => <link rel="stylesheet" key={s} href={s}/>)}
+          <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
         </head>
         <body>
           <div id="app"/>
+          <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
           {scripts.map(s => <script key={s} src={s}/>)}
         </body>
       </html>
