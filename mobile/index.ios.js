@@ -25,18 +25,8 @@ const firebaseApp = firebase.initializeApp(firebaseConfig)
 class Eyeinthesky extends Component {
   constructor() {
     super()
-    this.state = { location: {
-        coords: {
-          course:358.28,
-          speed:0,
-          longitude:-122.02322184,
-          latitude:37.33743371,
-          accuracy:5,
-          altitude:0,
-          altitudeAccuracy:-1
-        },
-        timestamp:0
-      }
+    this.state = {
+      location: {}
     }
     this.locationsRef = this.getRef().child('locations')
   }
@@ -49,22 +39,8 @@ class Eyeinthesky extends Component {
     Location.setDistanceFilter(5.0)
     DeviceEventEmitter.addListener('locationUpdated', (location) => {
       console.log(location)
-      this.setState({'location':location})
+      this.setState({ location })
       this.locationsRef.push({ location })
-    })
-    this.listenForItems(this.locationsRef)
-  }
-  listenForItems(locationsRef) {
-    locationsRef.on('value', (snap) => {
-
-      // get children as an array
-      const locations = []
-      snap.forEach((child) => {
-        locations.push({
-          title: child.val().title,
-          _key: child.key
-        })
-      })
     })
   }
   render() {
