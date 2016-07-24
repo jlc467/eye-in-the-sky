@@ -1,8 +1,14 @@
 /* global mapboxgl */
-const { firebaseConfig } = require( '../../../../config.js')
+const firebaseConfig  = {
+    apiKey: "Ma2GyFgiUmpueLu4n2ge4Ut7zchkfO4NDlbTgZMN",
+    authDomain: "gpstracker-60a24.firebaseapp.com",
+    databaseURL: "https://gpstracker-60a24.firebaseio.com/",
+    storageBucket: "gs://gpstracker-60a24.appspot.com"
+  }
 import React from 'react'
 import './Home.css'
 import firebase from 'firebase'
+import { has } from 'lodash'
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
 
@@ -53,7 +59,7 @@ class Home extends React.Component {
   }
   componentDidUpdate(prevProps, prevState) {
     this.source.setData(this.state.point)
-    if (prevState.point.properties.default) {
+    if (has(prevState, 'point.properties.default') && prevState.point.properties.default === true) {
       this.map.easeTo({
         center: this.state.point.coordinates,
         zoom: 15
